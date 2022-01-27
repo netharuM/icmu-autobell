@@ -1,0 +1,226 @@
+:root {
+    /* --background: #22252f; */
+    --background: #212121;
+    /* --foreground: #8bf7ca; */
+    --foreground: #6ed66e;
+}
+
+label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+    margin: auto;
+    max-width: 38rem;
+    padding-top: 65px;
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.topBarContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.topBar {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    width: calc(100vw - 60px);
+    color: white;
+    background-color: var(--background);
+    box-shadow: 3px 3px 5px #1b1a1a, -3px -3px 5px #2b2b2b;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+.playBackControllerContainer {
+    padding-bottom: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.controllerBtn {
+    border: none;
+    color: var(--foreground);
+    padding: 5px;
+    background-color: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.controllerBtn:hover {
+    transform: scale(1.2);
+    background-color: var(--foreground);
+    color: var(--background);
+}
+
+.topControll {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.playBackControllers {
+    background-color: var(--background);
+    border-right: 4px solid var(--foreground);
+    border-left: 4px solid var(--foreground);
+    border-top: 1px solid var(--foreground);
+    border-bottom: 1px solid var(--foreground);
+    border-radius: 9px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100vw - 200px);
+}
+
+.playBackControl {
+    width: 100%;
+}
+
+input[type="range"] {
+    height: 32px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+    background-color: var(--background);
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: rgb(75, 75, 75);
+    border-radius: 25px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    color: rgb(75, 75, 75);
+    background: var(--background);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+
+input[type="range"]:hover::-webkit-slider-runnable-track {
+    background: #b6b6b6;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+    background: #b6b6b6;
+    height: 16px;
+    width: 16px;
+    margin-top: -6px;
+}
+.playbackBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.previewBell {
+    height: 50px;
+    width: 50px;
+    border-radius: 4px;
+    background-color: var(--background);
+    border: 2px solid var(--foreground);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropDowns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--foreground);
+    border: none;
+    outline: none;
+    border-radius: 9px;
+}
+
+.dropDowns:hover {
+    cursor: pointer;
+}
+
+.dropDowns > option {
+    background-color: var(--background);
+    color: var(--foreground);
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.dropDowns > option:valid {
+    background-color: var(--foreground);
+    color: var(--background);
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.fileSelectorHidden {
+    display: none;
+}
+
+::selection {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--foreground);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: white;
+}

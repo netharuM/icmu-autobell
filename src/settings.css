@@ -1,0 +1,82 @@
+.settingsPageContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.settingsPage {
+    min-width: 200px;
+    min-height: 300px;
+    padding: 10px;
+    border-radius: 11px;
+    background-color: var(--background);
+    color: var(--foreground);
+    border: 2px solid;
+}
+
+.aboutPage {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.socialLink {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid var(--foreground);
+    border-radius: 11px;
+    padding: 10px;
+    color: var(--foreground);
+    font-size: medium;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+}
+
+.socialLink:hover {
+    background-color: var(--foreground);
+    color: var(--background);
+    cursor: pointer;
+}
+
+.githubLink::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../assets/icons/github-brands.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    filter: invert(100%);
+}
+.instaLink::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../assets/icons/instagram-brands.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    filter: invert(100%);
+}
+
+.infoIcon {
+    display: block;
+    height: 100px;
+    background-image: url(../assets/icons/info-circle-solid.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+    filter: invert(100%);
+}

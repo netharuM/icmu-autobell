@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>auto-bell</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="./bells.css">
+  <link rel="stylesheet" href="./settings.css">
+  <link rel="stylesheet" href="./tabs.css">
+  <link rel="stylesheet" href="../node_modules/material-design-icons/iconfont/material-icons.css">
+  <script defer src="./main.js"></script>
+</head>
+
+<body>
+  <div class="topBarContainer">
+    <div class="topBar" id="topBar">
+      mediaAutoBell
+      <div class="topBarOptions">
+        <button class="bellToolBtn" id="settingsOpenBtn">
+          <i class="material-icons">settings</i>
+        </button>
+        <button class="bellToolBtn" id="refreshBells">
+          <i class="material-icons">refresh</i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="bellContainer" class="bellContainer">
+    <!-- bells will go here -->
+  </div>
+
+  <div class="bellEditorContainer" id="bellEditorContainer">
+    <div class="bellEditor" id="bellEditor">
+      <input type="time" name="time" id="editBellTime" class="editTime">
+      <input type="text" name="name" id="nameEditBell" placeholder="name" class="editTextInput">
+      <textarea name="description" id="descEditBell" placeholder="description"
+        class="editTextInput descBellEdit"></textarea>
+      <div class="selectAudio">
+        <button class="selectAudioBtn editBtn" id="selectAudioBtn">
+          <i class="material-icons">audiotrack</i>
+          select a new audio
+        </button>
+        <button class="selectAudioBtn editBtn" id="openInFolder">
+          <i class="material-icons">folder</i>
+          open file in folder
+        </button>
+        <input type="file" name="bellAudio" id="audioEditBellFile" class="fileSelectorHidden" accept="audio/*">
+      </div>
+      <div class="buttonsContainer" id="buttonsContainer">
+        <button id="cancelEditedBell" class="cancelEditedBell editBtn">cancel</button>
+        <button id="saveEditedBell" class="saveEditBell editBtn">save</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="playBackControllerContainer" id="playBackControllerContainer">
+    <div class="playBackControllers" id="playBackControllers">
+      <div class="previewBell" id="previewBell">
+        <i class="material-icons">music_note</i>
+      </div>
+      <div class="playBackControl">
+
+        <div class="topControll" id="topControll">
+          <div id="nameOfPlayBack" class="namePlay">disti didin</div>
+          <div class="playbackBtns">
+            <button class="playBackBtn controllerBtn" id="controlBell">
+              <i class="material-icons" id="play_pause_icon">pause</i>
+            </button>
+            <button class="playBackBtn controllerBtn" id="stopBell">
+              <i class="material-icons">stop</i>
+            </button>
+          </div>
+        </div>
+
+        <input type="range" name="bellSeeker" id="bellSeeker" class="bellSeeker">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="settingsPageContainer" id="settingsPageContainer">
+    <div class="settingsPage" id="settingsPage">
+      <div id="settingsTabs" class="settingsTabs">
+        <!-- tabs for settings will go here -->
+      </div>
+      <div id="settingsPages" class="settingsPages">
+        <!-- pages for settings will go here -->
+        <div id="audioSettings">
+
+          <div class="bellAudioOut">
+            bellOutPut:
+            <select name="bellAudioOutput" id="bellAudioOutPutSelection" class="dropDowns"></select>
+          </div>
+          <div class="otherAudioOut">
+            otherAudioOutPut:
+            <select name="otherAudioOutput" id="otherAudioOutPutSelection" class="dropDowns"></select>
+          </div>
+        </div>
+        <div id="themeSettings">themeSettingsPAge</div>
+        <div id="aboutSettings" class="aboutPage">
+          <h2>autoBell</h2> - a autoBell system for the isipathana college media unit
+          <div class="infoIcon"></div>
+          <br>
+          <a class="socialLink githubLink" id="githubLink">
+            source code on github
+          </a>
+          <a class="socialLink instaLink" id="instaLink">
+            follow me on instagram
+          </a>
+          <div id="version" class="version">
+            v0.0.0
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

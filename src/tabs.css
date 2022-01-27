@@ -1,0 +1,40 @@
+.tab_radio {
+    display: none;
+}
+
+.tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border-radius: 9px;
+    border: 1px solid var(--foreground);
+    gap: 15px;
+    transition: background-color 0.2s ease-out;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.tab:hover {
+    cursor: pointer;
+    color: var(--background);
+    background-color: var(--foreground);
+}
+
+.tab_radio:checked + .tab {
+    color: var(--background);
+    background-color: var(--foreground);
+    transform: scaleY(1.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.settingsTabs {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid var(--foreground);
+    padding: 5px 30px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+}

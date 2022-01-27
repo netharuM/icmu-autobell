@@ -1,0 +1,130 @@
+{
+    "bells": [
+        {
+            "audioPath": "E:\\audio\\w.mp3",
+            "name": "dumbBell",
+            "desc": "just a dumb test\nnot that dumb thoo",
+            "time": {
+                "hour": 1,
+                "minute": 56
+            }
+        },
+        {
+            "audioPath": "E:\\audio\\w.mp3",
+            "name": "dumbFrick",
+            "desc": "another dumb shit\ndas",
+            "time": {
+                "hour": 2,
+                "minute": 53
+            }
+        },
+        {
+            "time": {
+                "hour": 4,
+                "minute": 33
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "just a dumb test",
+            "name": "dumbBell"
+        },
+        {
+            "time": {
+                "hour": 2,
+                "minute": 53
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "another dumb shit",
+            "name": "dumbFrick"
+        },
+        {
+            "time": {
+                "hour": 4,
+                "minute": 33
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "just a dumb test",
+            "name": "dumbBell"
+        },
+        {
+            "time": {
+                "hour": 2,
+                "minute": 53
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "another dumb shit",
+            "name": "dumbFrick"
+        },
+        {
+            "time": {
+                "hour": 4,
+                "minute": 33
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "just a dumb test",
+            "name": "dumbBell"
+        },
+        {
+            "time": {
+                "hour": 2,
+                "minute": 53
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "another dumb shit",
+            "name": "dumbFrick"
+        },
+        {
+            "time": {
+                "hour": 4,
+                "minute": 33
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "just a dumb test",
+            "name": "dumbBell"
+        },
+        {
+            "time": {
+                "hour": 2,
+                "minute": 53
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "another dumb shit",
+            "name": "dumbFrick"
+        },
+        {
+            "time": {
+                "hour": 4,
+                "minute": 33
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "just a dumb test",
+            "name": "dumbBell"
+        },
+        {
+            "time": {
+                "hour": 2,
+                "minute": 53
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "another dumb shit",
+            "name": "dumbFrick"
+        },
+        {
+            "time": {
+                "hour": 4,
+                "minute": 33
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "just a dumb test",
+            "name": "dumbBell"
+        },
+        {
+            "time": {
+                "hour": 2,
+                "minute": 53
+            },
+            "audioPath": "E:\\audio\\w.mp3",
+            "desc": "another dumb shit",
+            "name": "dumbFrick"
+        }
+    ]
+}
