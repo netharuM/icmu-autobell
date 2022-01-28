@@ -2,7 +2,7 @@
   "name": "auto-bell",
   "productName": "auto-bell",
   "version": "0.0.1",
-  "description": "My Electron application description",
+  "description": "auto-bell for the isipathana college media unit",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -16,10 +16,12 @@
     "name": "netharu methmitha",
     "email": "netharu.m@gmail.com"
   },
-  "license": "MIT",
+  "license": "GPL-3.0",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "./assets/icon.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -55,6 +57,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "electron": "16.0.7"
+    "electron": "16.0.7",
+    "electron-builder": "^22.14.5"
   }
 }
