@@ -2,11 +2,11 @@
     "bells": [
         {
             "audioPath": "E:\\audio\\w.mp3",
-            "name": "dumbBell",
-            "desc": "just a dumb test\nnot that dumb thoo",
+            "name": "dumbFrick",
+            "desc": "another dumb shit\ndas",
             "time": {
-                "hour": 22,
-                "minute": 20
+                "hour": 2,
+                "minute": 53
             }
         },
         {

@@ -216,7 +216,7 @@ class bell {
             this.bellNotification = new Notification(
                 `auto-bell : ${data.name}`,
                 {
-                    body: `up coming alarm at ${this.time.hour}:${this.time.minute}`,
+                    body: `up coming alarm at ${this.formattedTime}`,
                 }
             );
             clearTimeout(this.bellNotificationTimeOut);
