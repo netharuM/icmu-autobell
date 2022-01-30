@@ -1,3 +1,13 @@
 {
-    "bells": []
+    "bells": [
+        {
+            "name": "dadsa",
+            "desc": "fdfdsdf",
+            "time": {
+                "hour": 14,
+                "minute": 22
+            },
+            "audioPath": "E:\\audio\\Scheming Weasel Faster (Kevin Macleod) - Vanoss Gaming Background Music (HD).mp3"
+        }
+    ]
 }

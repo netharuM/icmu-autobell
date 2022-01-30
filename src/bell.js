@@ -512,6 +512,7 @@ class bells {
         this.addBellBtn.addEventListener("click", () => {
             this.bellAdder.addBell((data) => {
                 this.bellsTable.push(data);
+                this.onBellAdd(data);
                 this.refresh();
             });
         });
@@ -612,7 +613,7 @@ class bells {
             this.saveBell(alarm);
         };
         alarm.onDelete = () => {
-            this.removeBell(alarm);
+            this.removeBell();
             this.deleteBell(alarm);
         };
 
