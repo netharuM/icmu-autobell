@@ -112,6 +112,19 @@ class audioSettings {
     }
 }
 
+class applicationSettings {
+    constructor() {
+        this.launchOnStartupCheck = document.getElementById("launchOnStartup");
+        this.launchOnStartupCheck.addEventListener("change", (e) => {
+            ipcRenderer.send("start-on-startup", e.target.checked);
+        });
+        ipcRenderer.send("getAutoStartEnabled");
+        ipcRenderer.on("setAutoStartEnabled", (event, arg) => {
+            this.launchOnStartupCheck.checked = arg;
+        });
+    }
+}
+
 class settings {
     constructor() {
         this.container = document.getElementById("settingsPageContainer");
@@ -135,8 +148,8 @@ class settings {
                 element: document.getElementById("audioSettings"),
             },
             {
-                name: "themes",
-                element: document.getElementById("themeSettings"),
+                name: "application",
+                element: document.getElementById("applicationSettings"),
             },
             {
                 name: "about",
@@ -145,6 +158,7 @@ class settings {
         ]);
 
         this.audioSettings = new audioSettings();
+        this.appSettings = new applicationSettings();
 
         document.getElementById("instaLink").addEventListener("click", () => {
             shell.openExternal("https://instagram.com/netharu_methmitha");

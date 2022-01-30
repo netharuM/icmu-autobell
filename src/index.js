@@ -1,8 +1,22 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
+const autoLaunch = require("auto-launch");
 const path = require("path");
 
 ipcMain.on("version", (event, arg) => {
     event.reply("setVersion", app.getVersion());
+});
+
+ipcMain.on("start-on-startup", (event, arg) => {
+    if (arg) {
+        autolaunch.enable();
+    } else {
+        autolaunch.disable();
+    }
+});
+ipcMain.on("getAutoStartEnabled", (event, arg) => {
+    autolaunch.isEnabled().then((enabled) => {
+        event.reply("setAutoStartEnabled", enabled);
+    });
 });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -15,7 +29,27 @@ if (process.platform === "win32") {
     app.setAppUserModelId(app.name);
 }
 
+let tray = null;
+
+const gotTheLock = app.requestSingleInstanceLock();
+let autolaunch = new autoLaunch({
+    name: "auto-bell",
+    path: app.getPath("exe"),
+});
 const createWindow = () => {
+    if (!gotTheLock) {
+        app.quit();
+    } else {
+        app.on("second-instance", (event, command, workingDir) => {
+            if (mainWindow) {
+                if (mainWindow.isMinimized()) {
+                    mainWindow.restore();
+                }
+                mainWindow.show();
+            }
+        });
+    }
+
     // Create the browser window.
     const mainWindow = new BrowserWindow({
         width: 1080,
@@ -25,8 +59,16 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false,
         },
+        show: false,
         autoHideMenuBar: true,
         icon: path.join(__dirname, "../assets/icon.png"),
+    });
+
+    mainWindow.on("close", (e) => {
+        if (!app.isQuitting) {
+            e.preventDefault();
+            mainWindow.hide();
+        }
     });
 
     // and load the index.html of the app.
@@ -34,6 +76,28 @@ const createWindow = () => {
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools();
+
+    tray = new Tray(path.join("assets", "icon.png"));
+    let contextMenuTemplate = [
+        {
+            label: "Quit",
+            click: function () {
+                app.quit();
+            },
+        },
+        {
+            label: "Open",
+            click: function () {
+                mainWindow.show();
+            },
+        },
+    ];
+    const contextMenu = Menu.buildFromTemplate(contextMenuTemplate);
+    tray.setContextMenu(contextMenu);
+    tray.setToolTip("auto-bell is running");
+    tray.on("click", () => {
+        mainWindow.show();
+    });
 };
 
 // This method will be called when Electron has finished
@@ -56,6 +120,10 @@ app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
+});
+
+app.on("before-quit", () => {
+    app.isQuitting = true;
 });
 
 // In this file you can include the rest of your app's specific main process
