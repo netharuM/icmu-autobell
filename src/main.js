@@ -7,9 +7,10 @@ var bellTablePath = "../data/bells.json";
 
 function loadTable(path) {
     // reading the bells
-    const table = JSON.parse(fs.readFileSync(path, "utf8"));
+    let tableAsAString = fs.readFileSync(path, "utf8");
+    const table = JSON.parse(tableAsAString ? tableAsAString : "{}");
     return {
-        bells: table.bells,
+        bells: table.bells ? table.bells : [],
     };
 }
 
@@ -30,6 +31,22 @@ bellHandler.onBellSave = (index, bell) => {
         JSON.stringify(bellTable, null, 4)
     );
     bell.deactivateSave();
+};
+
+bellHandler.onBellDelete = (table) => {
+    bellTable.bells = table;
+    fs.writeFileSync(
+        path.resolve(__dirname, bellTablePath),
+        JSON.stringify(bellTable, null, 4)
+    );
+};
+
+bellHandler.onBellAdd = (data) => {
+    bellTable.bells.push(data);
+    fs.writeFileSync(
+        path.resolve(__dirname, bellTablePath),
+        JSON.stringify(bellTable, null, 4)
+    );
 };
 
 bellRefreshBtn.addEventListener("click", () => {
