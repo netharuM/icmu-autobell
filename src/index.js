@@ -77,7 +77,7 @@ const createWindow = () => {
     // Open the DevTools.
     // mainWindow.webContents.openDevTools();
 
-    tray = new Tray(path.join("assets", "icon.png"));
+    tray = new Tray(path.join(__dirname, "../assets/icon.png"));
     let contextMenuTemplate = [
         {
             label: "Quit",
