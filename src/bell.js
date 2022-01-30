@@ -613,7 +613,7 @@ class bells {
             this.saveBell(alarm);
         };
         alarm.onDelete = () => {
-            this.removeBell();
+            this.removeBell(alarm);
             this.deleteBell(alarm);
         };
 
