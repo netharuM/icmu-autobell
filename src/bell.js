@@ -305,6 +305,7 @@ class bell {
         this.onAlarm = () => {};
         this.onEdit = () => {};
         this.onSave = () => {};
+        this.onDelete = () => {};
         this.saveActivated = false;
         this.timeFormatter = new Intl.DateTimeFormat("en-US", {
             hourCycle: "h24",
@@ -406,6 +407,9 @@ class bell {
         deleteBell.innerHTML = '<i class="material-icons">delete</i>';
         deleteBell.classList.add("deleteBell");
         deleteBell.classList.add("bellToolBtn");
+        deleteBell.addEventListener("click", () => {
+            this.onDelete();
+        });
 
         let cancelBell = document.createElement("button");
         cancelBell.innerHTML = '<i class="material-icons">cancel</i>';
@@ -498,6 +502,8 @@ class bells {
         this.addBellBtn = document.getElementById("addNewFavBtn");
 
         this.onBellSave = (index, bell) => {};
+        this.onBellDelete = (bellsTable) => {};
+        this.onBellAdd = (bell) => {};
 
         this.bellEditor = new bellEditor();
         this.bellPlayBackControll = new playBackController();
@@ -582,6 +588,13 @@ class bells {
         this.onBellSave(indexOfBell, bell);
     }
 
+    deleteBell(bell) {
+        let indexOfBell = this.bells.indexOf(bell);
+        this.bellsTable.splice(indexOfBell, 1);
+        this.refresh();
+        this.onBellDelete(this.bellsTable);
+    }
+
     addBell(data) {
         // setting an Alarm to the time
         const alarm = new bell(data.time.hour, data.time.minute, {
@@ -597,6 +610,10 @@ class bells {
         };
         alarm.onSave = () => {
             this.saveBell(alarm);
+        };
+        alarm.onDelete = () => {
+            this.removeBell(alarm);
+            this.deleteBell(alarm);
         };
 
         // when user request a edit to the bell
