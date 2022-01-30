@@ -190,3 +190,32 @@
     flex-direction: row;
     gap: 5px;
 }
+
+.newBellPanelContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+}
+
+.addNewBellPanel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+    min-width: 300px;
+    min-height: 400px;
+    border-color: var(--foreground);
+    border-radius: 9px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 10px;
+    padding-bottom: 50px;
+    gap: 10px;
+}

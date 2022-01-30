@@ -1,6 +1,113 @@
 const { shell } = require("electron");
 const path = require("path");
+const fs = require("fs");
 const _ = require("lodash");
+
+class bellAdder {
+    constructor() {
+        this.container = document.getElementById("newBellPanelContainer");
+        this.cancelBtn = document.getElementById("cancelAddedBell");
+        this.saveBtn = document.getElementById("saveAddedBell");
+        this.bellName = document.getElementById("nameAddBell");
+        this.bellDesciption = document.getElementById("descAddBell");
+        this.selectAudio = document.getElementById("addAudioBtn");
+        this.selectAudioFile = document.getElementById("audioAddBellFile");
+        this.openInFolder = document.getElementById("openInFolderAddedAudio");
+        this.timeControll = document.getElementById("addBellTime");
+        this.scrollPositionWhenOpened = [0, 0];
+        this.audioPath = "";
+        this.onSave = () => {};
+        this.container.addEventListener("click", (e) => {
+            if (e.target === this.container) {
+                this.closePanel();
+            }
+        });
+        this.cancelBtn.addEventListener("click", () => {
+            this.closePanel();
+        });
+        this.saveBtn.addEventListener("click", () => {
+            this.onSave();
+            this.closePanel();
+        });
+        this.openInFolder.addEventListener("click", () => {
+            this.resolveAudioPath();
+            shell.showItemInFolder(this.audioPath);
+        });
+        this.selectAudio.addEventListener("click", () => {
+            this.selectAudioFile.click();
+        });
+        this.selectAudioFile.addEventListener("change", () => {
+            let filePath = this.selectAudioFile.files[0].path;
+            this.audioPath = filePath ? filePath : this.audioPath;
+            this.resolveAudioPath();
+        });
+        this.closePanel();
+    }
+
+    reset() {
+        this.audioPath = "";
+        this.onSave = () => {};
+        this.bellDesciption.value = "";
+        this.bellName.value = "";
+        this.timeControll.value = "";
+    }
+
+    resolveAudioPath() {
+        this.audioPath = this.audioPath ? path.resolve(this.audioPath) : "";
+    }
+
+    checkEveryThingFilled() {
+        this.resolveAudioPath();
+        if (!fs.existsSync(this.audioPath)) {
+            return false;
+        }
+        if (!this.bellName.value) {
+            return false;
+        }
+        if (!this.bellDesciption.value) {
+            return false;
+        }
+        if (!this.timeControll.value) {
+            return false;
+        }
+        return true;
+    }
+
+    addBell(bellCallback) {
+        this.openPanel();
+        this.onSave = () => {
+            // if everything is filled correctly we will send the bellData via a callback
+            if (this.checkEveryThingFilled()) {
+                let data = {
+                    name: this.bellName.value,
+                    desc: this.bellDesciption.value,
+                    time: {
+                        hour: parseInt(this.timeControll.value.split(":")[0]),
+                        minute: parseInt(this.timeControll.value.split(":")[1]),
+                    },
+                    audioPath: this.audioPath,
+                };
+                bellCallback(data);
+            }
+        };
+    }
+
+    openPanel() {
+        this.scrollPositionWhenOpened = [window.scrollX, window.scrollY];
+        window.scrollTo(0, 0);
+        document.querySelector("body").style.overflow = "hidden";
+        this.container.style.display = null;
+    }
+    closePanel() {
+        this.reset();
+        window.scrollTo(
+            this.scrollPositionWhenOpened[0],
+            this.scrollPositionWhenOpened[1]
+        );
+        document.querySelector("body").style.overflow = null;
+        this.container.style.display = "none";
+    }
+}
 
 class playBackController {
     constructor() {
@@ -95,6 +202,7 @@ class bellEditor {
         this.selectAudio = document.getElementById("selectAudioBtn");
         this.selectAudioFile = document.getElementById("audioEditBellFile");
         this.openInFolder = document.getElementById("openInFolder");
+        this.timeControll = document.getElementById("editBellTime");
 
         this.audioPath = "";
 
@@ -131,8 +239,6 @@ class bellEditor {
                 this.closeEditor(e);
             }
         });
-
-        this.timeControll = document.getElementById("editBellTime");
 
         this.scrollPositionWhenOpened = [0, 0];
         this.closeEditor();
@@ -389,10 +495,20 @@ class bells {
         this.bells = [];
         this.bellContainer = document.getElementById("bellContainer");
 
+        this.addBellBtn = document.getElementById("addNewFavBtn");
+
         this.onBellSave = (index, bell) => {};
 
         this.bellEditor = new bellEditor();
         this.bellPlayBackControll = new playBackController();
+        this.bellAdder = new bellAdder();
+
+        this.addBellBtn.addEventListener("click", () => {
+            this.bellAdder.addBell((data) => {
+                this.bellsTable.push(data);
+                this.refresh();
+            });
+        });
 
         for (let bell of this.bellsTable) {
             this.addBell(bell);

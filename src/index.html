@@ -80,6 +80,34 @@
     </div>
   </div>
 
+  <button class="addNewFavBtn" id="addNewFavBtn">
+    <i class="material-icons">add</i>
+  </button>
+
+  <div class="newBellPanelContainer" id="newBellPanelContainer">
+    <div class="addNewBellPanel" id="addNewBellPanel">
+      <input type="time" name="time" id="addBellTime" class="editTime">
+      <input type="text" name="name" id="nameAddBell" placeholder="name" class="editTextInput">
+      <textarea name="description" id="descAddBell" placeholder="description"
+        class="editTextInput descBellEdit"></textarea>
+      <div class="selectAudio">
+        <button class="selectAudioBtn editBtn" id="addAudioBtn">
+          <i class="material-icons">audiotrack</i>
+          select a new audio
+        </button>
+        <button class="selectAudioBtn editBtn" id="openInFolderAddedAudio">
+          <i class="material-icons">folder</i>
+          open file in folder
+        </button>
+        <input type="file" name="bellAudio" id="audioAddBellFile" class="fileSelectorHidden" accept="audio/*">
+      </div>
+      <div class="buttonsContainer" id="buttonsContainer">
+        <button id="cancelAddedBell" class="cancelEditedBell editBtn">cancel</button>
+        <button id="saveAddedBell" class="saveEditBell editBtn">add</button>
+      </div>
+    </div>
+  </div>
+
   <div class="settingsPageContainer" id="settingsPageContainer">
     <div class="settingsPage" id="settingsPage">
       <div id="settingsTabs" class="settingsTabs">

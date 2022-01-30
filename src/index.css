@@ -200,6 +200,33 @@ input[type="range"]:hover::-webkit-slider-thumb {
     display: none;
 }
 
+.addNewFavBtn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    background-color: var(--foreground);
+    color: var(--background);
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    transition: 0.1s ease-in-out;
+}
+.addNewFavBtn:hover {
+    transform: scale(1.2);
+    border-radius: 11px;
+    cursor: pointer;
+}
+
+.addNewFavBtn:active {
+    border-radius: 11px;
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
 ::selection {
     background: var(--foreground);
     color: var(--background);
