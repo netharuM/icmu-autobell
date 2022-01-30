@@ -2747,10 +2747,10 @@ matcher@^3.0.0:
   dependencies:
     escape-string-regexp "^4.0.0"
 
-material-design-icons@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/material-design-icons/-/material-design-icons-3.0.1.tgz#9a71c48747218ebca51e51a66da682038cdcb7bf"
-  integrity sha1-mnHEh0chjrylHlGmbaaCA4zct78=
+material-icons@^1.10.6:
+  version "1.10.6"
+  resolved "https://registry.yarnpkg.com/material-icons/-/material-icons-1.10.6.tgz#616bf924298631e8b7761fad4d5802a8cd839251"
+  integrity sha512-mVsXw91OON3J3uIVh9taIF1ZyDbcikRNCWv3KzsaJAGZTJbq0w1wdC8weCmyD3JDfAkxqK4WgVJITWPmVKJeDA==
 
 mem@^4.3.0:
   version "4.3.0"
