@@ -227,6 +227,32 @@ input[type="range"]:hover::-webkit-slider-thumb {
     transform: scale(0.9);
 }
 
+.checkBox {
+    -webkit-appearance: none;
+    background-color: var(--background);
+    border: 1px solid var(--foreground);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+}
+.checkBox:checked {
+    background-color: var(--foreground);
+    border: 1px solid var(--background);
+    color: var(--background);
+}
+.checkBox:checked:after {
+    content: "\2714";
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+}
+
+.checkBox:hover {
+    cursor: pointer;
+}
+
 ::selection {
     background: var(--foreground);
     color: var(--background);
