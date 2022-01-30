@@ -11,6 +11,10 @@ if (require("electron-squirrel-startup")) {
     app.quit();
 }
 
+if (process.platform === "win32") {
+    app.setAppUserModelId(app.name);
+}
+
 const createWindow = () => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({

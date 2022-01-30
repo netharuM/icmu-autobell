@@ -326,6 +326,7 @@ class bell {
                 `auto-bell : ${data.name}`,
                 {
                     body: `up coming alarm at ${this.formattedTime}`,
+                    icon: path.resolve(__dirname, "../assets/icon.png"),
                 }
             );
             clearTimeout(this.bellNotificationTimeOut);

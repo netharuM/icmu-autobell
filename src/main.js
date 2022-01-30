@@ -71,4 +71,5 @@ settingsHandler.onAudioBellOutChange = (e) => {
 
 new Notification("auto-bell", {
     body: "auto-bell is running",
+    icon: path.resolve(__dirname, "../assets/icon.png"),
 });
