@@ -171,11 +171,13 @@ class bellEditor {
         this.onSave = () => {
             if (change) {
                 this.resolveAudioPath();
+                let hour = parseInt(this.timeControll.value.split(":")[0]);
+                let minute = parseInt(this.timeControll.value.split(":")[1]);
                 //calling the callback in the value change
                 change({
                     time: {
-                        hour: parseInt(this.timeControll.value.split(":")[0]),
-                        minute: parseInt(this.timeControll.value.split(":")[1]),
+                        hour: hour,
+                        minute: minute,
                     },
                     name: this.bellName.value,
                     desc: this.bellDesciption.value,
@@ -488,18 +490,27 @@ class bells {
             this.bellEditor.editBell(alarm, (values) => {
                 this.bellsTable[currentBellPosition] = {
                     time: {
-                        hour: values.time.hour
-                            ? values.time.hour
-                            : currentSettings.time.hour,
-                        minute: values.time.minute
-                            ? values.time.minute
-                            : currentSettings.time.minute,
+                        hour:
+                            typeof values.time.hour === "number"
+                                ? values.time.hour
+                                : currentSettings.time.hour,
+                        minute:
+                            typeof values.time.minute === "number"
+                                ? values.time.minute
+                                : currentSettings.time.minute,
                     },
-                    audioPath: values.audioPath
-                        ? values.audioPath
-                        : currentSettings.audioPath,
-                    name: values.name ? values.name : currentSettings.name,
-                    desc: values.desc ? values.desc : currentSettings.desc,
+                    audioPath:
+                        typeof values.audioPath === "string"
+                            ? values.audioPath
+                            : currentSettings.audioPath,
+                    name:
+                        typeof values.name === "string"
+                            ? values.name
+                            : currentSettings.name,
+                    desc:
+                        typeof values.desc === "string"
+                            ? values.desc
+                            : currentSettings.desc,
                 };
                 this.refresh();
             });
