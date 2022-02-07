@@ -16,6 +16,6 @@ for the linux installation
 
     ```bash
     cd icmu-autobell
-    chmod +x icmu-autobell
+    chmod +x INSTALL.sh
     ./INSTALL.sh
     ```
