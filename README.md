@@ -5,7 +5,7 @@ download the latest release and run it
 
 for the linux installation
 
-1) install nodejs 14 >= , git and npm in your system
+- install nodejs 14 >= , git and npm in your system
     and
 
     ```bash
@@ -18,4 +18,10 @@ for the linux installation
     cd icmu-autobell
     chmod +x INSTALL.sh
     ./INSTALL.sh
+    ```
+
+- uninstall application from a linux machine
+    ```bash
+    chmod +x UNINSTALL.sh
+    ./UNINSTALL.sh
     ```
