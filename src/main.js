@@ -2,9 +2,10 @@ const { bells } = require("./bell");
 const { settings } = require("./settings");
 const path = require("path");
 const { bellsConfig } = require("./configs");
+const { ipcRenderer } = require("electron");
 
-var bellTablePath = "../data/bells.json";
-const bellsTable = new bellsConfig(bellTablePath);
+const appDataPath = ipcRenderer.sendSync("getAppDataPath");
+const bellsTable = new bellsConfig(path.join(appDataPath, "bells.json"));
 const bellHandler = new bells(bellsTable.getBells());
 const bellRefreshBtn = document.getElementById("refreshBells");
 

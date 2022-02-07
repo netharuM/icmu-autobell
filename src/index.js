@@ -2,8 +2,21 @@ const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
 const autoLaunch = require("auto-launch");
 const path = require("path");
 const { settingsConfig } = require("./configs");
+const fs = require("fs");
 
-const settingsFile = new settingsConfig("../data/config.json");
+const appDataPath = path.join(app.getPath("userData"), "data");
+
+if (!fs.existsSync(appDataPath)) {
+    fs.mkdirSync(appDataPath);
+}
+
+const settingsFile = new settingsConfig(
+    path.join(appDataPath, "settings.json")
+);
+
+ipcMain.on("getAppDataPath", (event) => {
+    event.returnValue = appDataPath;
+});
 
 ipcMain.on("version", (event, arg) => {
     event.reply("setVersion", app.getVersion());
