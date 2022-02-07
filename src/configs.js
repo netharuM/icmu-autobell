@@ -86,8 +86,17 @@ class settingsConfig extends JSON_Config {
         super(pathToConfig);
         this.config = {
             runInBackgroundWhenClosed: true,
+            autoLaunchInStartup: false,
         };
         this.readConfig();
+    }
+
+    getAutoLaunchInStartup() {
+        return this.getKeyValue("autoLaunchInStartup");
+    }
+
+    setAutoLaunchInStartup(value) {
+        this.setKey("autoLaunchInStartup", value);
     }
 
     setBackgroundWhenClosed(value) {

@@ -33,8 +33,10 @@ ipcMain.on("get_rbw_closed", (e, arg) => {
 
 ipcMain.on("start-on-startup", (event, arg) => {
     if (arg) {
+        settingsFile.setAutoLaunchInStartup(true);
         autolaunch.enable();
     } else {
+        settingsFile.setAutoLaunchInStartup(false);
         autolaunch.disable();
     }
 });
@@ -61,6 +63,11 @@ let autolaunch = new autoLaunch({
     name: "auto-bell",
     path: app.getPath("exe"),
 });
+if (settingsFile.getAutoLaunchInStartup()) {
+    autolaunch.enable();
+} else {
+    autolaunch.disable();
+}
 const createWindow = () => {
     if (!gotTheLock) {
         app.quit();
