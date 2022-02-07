@@ -42,7 +42,11 @@ settingsHandler.onAudioBellOutChange = (e) => {
     bellHandler.setBellAudioOutput(e.target.value);
 };
 
-new Notification("auto-bell", {
+let running = new Notification("auto-bell", {
     body: "auto-bell is running",
     icon: path.resolve(__dirname, "../assets/icon.png"),
 });
+
+running.onclick = () => {
+    ipcRenderer.send("focusWindow");
+};

@@ -81,7 +81,14 @@ const createWindow = () => {
             }
         });
     }
-
+    ipcMain.on("focusWindow", (event, arg) => {
+        if (mainWindow) {
+            if (mainWindow.isMinimized()) {
+                mainWindow.restore();
+            }
+            mainWindow.show();
+        }
+    });
     // Create the browser window.
     const mainWindow = new BrowserWindow({
         width: 1080,

@@ -1,4 +1,4 @@
-const { shell } = require("electron");
+const { shell, ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const _ = require("lodash");
@@ -329,6 +329,9 @@ class bell {
                     icon: path.resolve(__dirname, "../assets/icon.png"),
                 }
             );
+            this.bellNotification.addEventListener("click", () => {
+                ipcRenderer.send("focusWindow");
+            });
             clearTimeout(this.bellNotificationTimeOut);
         }, this.eta() - 60000);
         var { bell, dropDown } = this.createBellElement();
