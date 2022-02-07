@@ -1,0 +1,3 @@
+this folder will contain configs to the program 
+and do not delete this 
+if you do you will lose everything that u did with the application

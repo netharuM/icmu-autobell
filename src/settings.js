@@ -115,12 +115,24 @@ class audioSettings {
 class applicationSettings {
     constructor() {
         this.launchOnStartupCheck = document.getElementById("launchOnStartup");
+        // run in background when closed (rbw_closed)
+        this.rbw_close = document.getElementById("rbw_close");
+
         this.launchOnStartupCheck.addEventListener("change", (e) => {
             ipcRenderer.send("start-on-startup", e.target.checked);
         });
         ipcRenderer.send("getAutoStartEnabled");
         ipcRenderer.on("setAutoStartEnabled", (event, arg) => {
             this.launchOnStartupCheck.checked = arg;
+        });
+
+        this.rbw_close.addEventListener("change", (e) => {
+            // setting the "run in backgroun when application get closed" to the check box value
+            ipcRenderer.send("set_rbw_closed", e.target.checked);
+        });
+        ipcRenderer.send("get_rbw_closed");
+        ipcRenderer.on("set_rbw_closed", (e, arg) => {
+            this.rbw_close.checked = arg;
         });
     }
 }

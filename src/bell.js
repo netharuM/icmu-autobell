@@ -594,7 +594,7 @@ class bells {
         let indexOfBell = this.bells.indexOf(bell);
         this.bellsTable.splice(indexOfBell, 1);
         this.refresh();
-        this.onBellDelete(this.bellsTable);
+        this.onBellDelete(bell);
     }
 
     addBell(data) {

@@ -1,57 +1,29 @@
 const { bells } = require("./bell");
 const { settings } = require("./settings");
-const fs = require("fs");
 const path = require("path");
+const { bellsConfig } = require("./configs");
 
 var bellTablePath = "../data/bells.json";
-
-function loadTable(path) {
-    // reading the bells
-    let tableAsAString = fs.readFileSync(path, "utf8");
-    const table = JSON.parse(tableAsAString ? tableAsAString : "{}");
-    return {
-        bells: table.bells ? table.bells : [],
-    };
-}
-
-var bellTable = loadTable(path.resolve(__dirname, bellTablePath));
-console.log(bellTable.bells);
-bellTable.bells.map((bell) => {
-    bell.audioPath = path.resolve(bell.audioPath);
-    return bell;
-});
-const bellHandler = new bells(bellTable.bells);
+const bellsTable = new bellsConfig(bellTablePath);
+const bellHandler = new bells(bellsTable.getBells());
 const bellRefreshBtn = document.getElementById("refreshBells");
 
 bellHandler.onBellSave = (index, bell) => {
     let newSettings = bell.getJSON();
-    bellTable.bells[index] = newSettings;
-    fs.writeFileSync(
-        path.resolve(__dirname, bellTablePath),
-        JSON.stringify(bellTable, null, 4)
-    );
+    bellsTable.setBell(index, newSettings);
     bell.deactivateSave();
 };
 
-bellHandler.onBellDelete = (table) => {
-    bellTable.bells = table;
-    fs.writeFileSync(
-        path.resolve(__dirname, bellTablePath),
-        JSON.stringify(bellTable, null, 4)
-    );
+bellHandler.onBellDelete = (bell) => {
+    bellsTable.removeBell(bell);
 };
 
 bellHandler.onBellAdd = (data) => {
-    bellTable.bells.push(data);
-    fs.writeFileSync(
-        path.resolve(__dirname, bellTablePath),
-        JSON.stringify(bellTable, null, 4)
-    );
+    bellsTable.addBell(data);
 };
 
 bellRefreshBtn.addEventListener("click", () => {
-    bellTable = loadTable(path.resolve(__dirname, bellTablePath));
-    bellHandler.setBells(bellTable.bells);
+    bellHandler.setBells(bellsTable.readBells());
 });
 
 const settingsOpenBtn = document.getElementById("settingsOpenBtn");

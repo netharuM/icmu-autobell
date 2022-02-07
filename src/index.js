@@ -1,9 +1,21 @@
 const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
 const autoLaunch = require("auto-launch");
 const path = require("path");
+const { settingsConfig } = require("./configs");
+
+const settingsFile = new settingsConfig("../data/config.json");
 
 ipcMain.on("version", (event, arg) => {
     event.reply("setVersion", app.getVersion());
+});
+
+// run in background when closed
+ipcMain.on("set_rbw_closed", (e, arg) => {
+    settingsFile.setBackgroundWhenClosed(arg);
+});
+
+ipcMain.on("get_rbw_closed", (e, arg) => {
+    e.reply("set_rbw_closed", settingsFile.getBackgroundWhenClosed());
 });
 
 ipcMain.on("start-on-startup", (event, arg) => {
@@ -65,7 +77,7 @@ const createWindow = () => {
     });
 
     mainWindow.on("close", (e) => {
-        if (!app.isQuitting) {
+        if (!app.isQuitting && settingsFile.getBackgroundWhenClosed()) {
             e.preventDefault();
             mainWindow.hide();
         }
