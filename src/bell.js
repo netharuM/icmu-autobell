@@ -6,6 +6,7 @@ const _ = require("lodash");
 class bellAdder {
     constructor() {
         this.container = document.getElementById("newBellPanelContainer");
+        this.bellPanel = document.getElementById("addNewBellPanel");
         this.cancelBtn = document.getElementById("cancelAddedBell");
         this.saveBtn = document.getElementById("saveAddedBell");
         this.bellName = document.getElementById("nameAddBell");
@@ -26,8 +27,15 @@ class bellAdder {
             this.closePanel();
         });
         this.saveBtn.addEventListener("click", () => {
-            this.onSave();
-            this.closePanel();
+            let isSuccess = this.onSave();
+            if (isSuccess) {
+                this.closePanel();
+            } else {
+                this.bellPanel.style.setProperty("--foreground", "orange");
+                setTimeout(() => {
+                    this.bellPanel.style.setProperty("--foreground", null);
+                }, 1000);
+            }
         });
         this.openInFolder.addEventListener("click", () => {
             this.resolveAudioPath();
@@ -88,6 +96,9 @@ class bellAdder {
                     audioPath: this.audioPath,
                 };
                 bellCallback(data);
+                return true;
+            } else {
+                return false;
             }
         };
     }
@@ -308,7 +319,7 @@ class bell {
         this.onDelete = () => {};
         this.saveActivated = false;
         this.timeFormatter = new Intl.DateTimeFormat("en-US", {
-            hourCycle: "h24",
+            hourCycle: "h23",
             hour: "numeric",
             minute: "numeric",
         });
@@ -626,27 +637,32 @@ class bells {
             let currentBellPosition = this.bells.indexOf(alarm);
             let currentSettings = this.bellsTable[currentBellPosition];
             this.bellEditor.editBell(alarm, (values) => {
+                console.log(values);
                 this.bellsTable[currentBellPosition] = {
                     time: {
                         hour:
+                            values.time.hour &&
                             typeof values.time.hour === "number"
                                 ? values.time.hour
                                 : currentSettings.time.hour,
                         minute:
+                            values.time.minute &&
                             typeof values.time.minute === "number"
                                 ? values.time.minute
                                 : currentSettings.time.minute,
                     },
                     audioPath:
-                        typeof values.audioPath === "string"
+                        values.audioPath &&
+                        typeof values.audioPath === "string" &&
+                        fs.existsSync(values.audioPath)
                             ? values.audioPath
                             : currentSettings.audioPath,
                     name:
-                        typeof values.name === "string"
+                        values.name && typeof values.name === "string"
                             ? values.name
                             : currentSettings.name,
                     desc:
-                        typeof values.desc === "string"
+                        values.desc && typeof values.desc === "string"
                             ? values.desc
                             : currentSettings.desc,
                 };
