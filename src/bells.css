@@ -8,6 +8,10 @@
     transition: 0.1s ease-in-out;
 }
 
+.bell.playing {
+    border-color: var(--foreground);
+}
+
 .bell:hover {
     border-color: #616161;
 }

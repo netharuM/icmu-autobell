@@ -174,18 +174,17 @@ class playBackController {
         this.setPauseIcon();
         this.openController();
         this.onPlay = () => {
-            bell.alarm.play();
+            bell.playAlarm();
         };
         this.onPause = () => {
-            bell.alarm.pause();
+            bell.pauseAlarm();
         };
         bell.alarm.addEventListener("ended", () => {
             this.setPlayIcon();
             this.closeController();
         });
         this.onStop = () => {
-            bell.alarm.pause();
-            bell.alarm.currentTime = 0;
+            bell.stopAlarm();
             this.setPlayIcon();
             this.closeController();
         };
@@ -328,9 +327,13 @@ class bell {
         );
         this.data = data;
         this.alarm = new Audio(this.data.audioPath);
+        this.alarm.addEventListener("ended", () => {
+            this.element.classList.remove("playing");
+        });
         this.alaramTimeOut = setTimeout(() => {
             this.alarm.play();
             this.onAlarm();
+            this.element.classList.add("playing");
         }, this.eta());
         this.bellNotificationTimeOut = setTimeout(() => {
             this.bellNotification = new Notification(
@@ -349,6 +352,20 @@ class bell {
         this.element = bell;
         this.dropDown = dropDown;
         this.hideDropDown();
+    }
+
+    stopAlarm() {
+        this.alarm.pause();
+        this.alarm.currentTime = 0;
+        this.element.classList.remove("playing");
+    }
+
+    pauseAlarm() {
+        this.alarm.pause();
+    }
+
+    playAlarm() {
+        this.alarm.play();
     }
 
     getJSON() {
