@@ -1,7 +1,6 @@
 const { shell, ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
-// const _ = require("lodash");
 
 function deepEqual(x, y) {
     const ok = Object.keys,
@@ -62,6 +61,7 @@ class bellAdder {
     }
 
     reset() {
+        this.selectAudioFile.value = "";
         this.audioPath = "";
         this.onSave = () => {};
         this.bellDesciption.value = "";
