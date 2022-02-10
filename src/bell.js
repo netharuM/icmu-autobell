@@ -1,8 +1,17 @@
 const { shell, ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
-const _ = require("lodash");
+// const _ = require("lodash");
 
+function deepEqual(x, y) {
+    const ok = Object.keys,
+        tx = typeof x,
+        ty = typeof y;
+    return x && y && tx === "object" && tx === ty
+        ? ok(x).length === ok(y).length &&
+              ok(x).every((key) => deepEqual(x[key], y[key]))
+        : x === y;
+}
 class bellAdder {
     constructor() {
         this.container = document.getElementById("newBellPanelContainer");
@@ -691,7 +700,7 @@ class bells {
             this.bellEditor.onClose = () => {
                 let newBell = this.bells[currentBellPosition];
                 if (
-                    !_.isEqual(
+                    !deepEqual(
                         currentSettings,
                         this.bellsTable[currentBellPosition]
                     )

@@ -1,6 +1,16 @@
 const fs = require("fs");
 const path = require("path");
-const _ = require("lodash");
+// const _ = require("lodash");
+
+function deepEqual(x, y) {
+    const ok = Object.keys,
+        tx = typeof x,
+        ty = typeof y;
+    return x && y && tx === "object" && tx === ty
+        ? ok(x).length === ok(y).length &&
+              ok(x).every((key) => deepEqual(x[key], y[key]))
+        : x === y;
+}
 
 class JSON_Config {
     constructor(pathToConfig) {
@@ -39,7 +49,7 @@ class JSON_Config {
         let data = fs.readFileSync(this.pathToConfig, "utf8");
         if (
             this.validateConfig(data) &&
-            !_.isEqual(this.config, JSON.parse(data))
+            !deepEqual(this.config, JSON.parse(data))
         ) {
             return true;
         }
@@ -133,7 +143,7 @@ class bellsConfig extends JSON_Config {
     removeBell(bell) {
         console.log(bell);
         this.config.bells = this.config.bells.filter(
-            (b) => !_.isEqual(b, bell)
+            (b) => !deepEqual(b, bell)
         );
         this.writeToConfig(this.config);
     }
