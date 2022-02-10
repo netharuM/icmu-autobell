@@ -141,7 +141,6 @@ class bellsConfig extends JSON_Config {
     }
 
     removeBell(bell) {
-        console.log(bell);
         this.config.bells = this.config.bells.filter(
             (b) => !deepEqual(b, bell)
         );

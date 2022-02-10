@@ -552,9 +552,16 @@ class bells {
 
         this.addBellBtn.addEventListener("click", () => {
             this.bellAdder.addBell((data) => {
-                this.bellsTable.push(data);
-                this.onBellAdd(data);
-                this.refresh();
+                if (
+                    !deepEqual(
+                        data,
+                        this.bellsTable[this.bellsTable.length - 1]
+                    )
+                ) {
+                    this.bellsTable.push(data);
+                    this.refresh();
+                    this.onBellAdd(data);
+                }
             });
         });
 
@@ -617,11 +624,9 @@ class bells {
          * removing the bell from the bells
          */
         bell.clear();
-        let bellIndex = this.bells.indexOf(bell);
-        if (bellIndex > -1) {
-            this.bells.splice(bellIndex, 1);
-            this.bellsTable.splice(bellIndex, 1);
-        }
+        this.bellsTable = this.bellsTable.filter(
+            (b) => !deepEqual(b, bell.getJSON())
+        );
         this.refresh();
     }
 
@@ -631,11 +636,10 @@ class bells {
     }
 
     deleteBell(bell) {
-        let bellIndex = this.bells.indexOf(bell);
-        if (bellIndex > -1) {
-            this.bells.splice(bellIndex, 1);
-            this.bellsTable.splice(bellIndex, 1);
-        }
+        bell.clear();
+        this.bellsTable = this.bellsTable.filter(
+            (b) => !deepEqual(b, bell.getJSON())
+        );
         this.refresh();
         this.onBellDelete(bell);
     }
