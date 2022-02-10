@@ -16,7 +16,11 @@ bellHandler.onBellSave = (index, bell) => {
 };
 
 bellHandler.onBellDelete = (bell) => {
-    bellsTable.removeBell(bell);
+    bellsTable.removeBell(bell.getJSON());
+};
+
+bellsTable.updateBells = () => {
+    bellHandler.setBells(bellsTable.getBells());
 };
 
 bellHandler.onBellAdd = (data) => {

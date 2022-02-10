@@ -622,8 +622,11 @@ class bells {
     }
 
     deleteBell(bell) {
-        let indexOfBell = this.bells.indexOf(bell);
-        this.bellsTable.splice(indexOfBell, 1);
+        let bellIndex = this.bells.indexOf(bell);
+        if (bellIndex > -1) {
+            this.bells.splice(bellIndex, 1);
+            this.bellsTable.splice(bellIndex, 1);
+        }
         this.refresh();
         this.onBellDelete(bell);
     }

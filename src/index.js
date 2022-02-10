@@ -5,6 +5,7 @@ const { settingsConfig } = require("./configs");
 const fs = require("fs");
 
 const appDataPath = path.join(app.getPath("userData"), "data");
+console.log("appDataPath: ", appDataPath);
 
 if (!fs.existsSync(appDataPath)) {
     fs.mkdirSync(appDataPath);

@@ -10,11 +10,14 @@ class JSON_Config {
         fs.watchFile(this.pathToConfig, (curr, prev) => {
             if (this.diffCalcOnChange(curr, prev)) {
                 this.readConfig();
+                this.onUpdate();
             } else {
                 this.writeToConfig(this.config);
             }
         });
     }
+
+    onUpdate() {}
 
     validateConfig(config) {
         // validates the config file (example : if its empty or not a json)
@@ -114,7 +117,12 @@ class bellsConfig extends JSON_Config {
         this.config = {
             bells: [],
         };
+        this.updateBells = () => {};
         this.readBells();
+    }
+
+    onUpdate() {
+        this.updateBells();
     }
 
     addBell(bell) {
@@ -123,7 +131,10 @@ class bellsConfig extends JSON_Config {
     }
 
     removeBell(bell) {
-        this.config.bells = this.config.bells.filter((b) => b !== bell);
+        console.log(bell);
+        this.config.bells = this.config.bells.filter(
+            (b) => !_.isEqual(b, bell)
+        );
         this.writeToConfig(this.config);
     }
 
