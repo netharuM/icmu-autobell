@@ -76,6 +76,7 @@ class audioSettings {
         this.otherOutSelect.addEventListener("change", (e) => {
             this.onOtherOutChange(e);
         });
+        this.render();
     }
 
     async render() {
