@@ -546,6 +546,10 @@ class bells {
         this.onBellDelete = (bellsTable) => {};
         this.onBellAdd = (bell) => {};
 
+        this.sorter = (a, b) => {
+            return a.eta() - b.eta();
+        };
+
         this.bellEditor = new bellEditor();
         this.bellPlayBackControll = new playBackController();
         this.bellAdder = new bellAdder();
@@ -570,6 +574,20 @@ class bells {
         }
         // rendering the bells to the DOM
         this.render();
+    }
+
+    sortByName() {
+        this.sorter = (a, b) => {
+            return a.data.name.localeCompare(b.data.name);
+        };
+        this.refresh();
+    }
+
+    sortByClosest() {
+        this.sorter = (a, b) => {
+            return a.eta() - b.eta();
+        };
+        this.refresh();
     }
 
     setBellAudioOutput(sinkId) {
@@ -611,7 +629,7 @@ class bells {
          */
         // sorting the bells to the time
         let sortedWithTime = this.bells.sort((a, b) => {
-            return a.eta() - b.eta();
+            return this.sorter(a, b);
         });
         // adding to the DOM
         for (let bell of sortedWithTime) {

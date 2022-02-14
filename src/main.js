@@ -1,13 +1,52 @@
 const { bells } = require("./bell");
 const { settings } = require("./settings");
-const path = require("path");
 const { bellsConfig } = require("./configs");
 const { ipcRenderer } = require("electron");
+const path = require("path");
 
 const appDataPath = ipcRenderer.sendSync("getAppDataPath");
 const bellsTable = new bellsConfig(path.join(appDataPath, "bells.json"));
 const bellHandler = new bells(bellsTable.getBells());
 const bellRefreshBtn = document.getElementById("refreshBells");
+
+class sorters {
+    constructor() {
+        this.onActivate = (sorter) => {};
+        this.activated = null;
+        this.sortersElmnts = {
+            name: document.getElementById("name-sort"),
+            close: document.getElementById("closest-sort"),
+        };
+        this.addToSorters();
+    }
+
+    addToSorters() {
+        for (const sorter in this.sortersElmnts) {
+            this.sortersElmnts[sorter].addEventListener("click", () => {
+                if (this.activated !== sorter) {
+                    this.activate(sorter);
+                }
+            });
+        }
+    }
+
+    activate(nameOfTheSorter) {
+        this.activated = nameOfTheSorter;
+        this.deactivateAll();
+        this.sortersElmnts[nameOfTheSorter].classList.add("active");
+        this.onActivate(this.activated);
+    }
+
+    deactivateAll() {
+        for (const sorter in this.sortersElmnts) {
+            this.deactivate(sorter);
+        }
+    }
+
+    deactivate(nameOfTheSorter) {
+        this.sortersElmnts[nameOfTheSorter].classList.remove("active");
+    }
+}
 
 bellHandler.onBellSave = (index, bell) => {
     let newSettings = bell.getJSON();
@@ -33,6 +72,21 @@ bellRefreshBtn.addEventListener("click", () => {
 
 const settingsOpenBtn = document.getElementById("settingsOpenBtn");
 const settingsHandler = new settings();
+const sorter = new sorters();
+sorter.onActivate = (sorter) => {
+    switch (sorter) {
+        case "name":
+            bellHandler.sortByName();
+            bellsTable.setSortBy("name");
+            break;
+        case "close":
+            bellHandler.sortByClosest();
+            bellsTable.setSortBy("close");
+            break;
+    }
+};
+
+sorter.activate(bellsTable.getSortBy());
 
 settingsOpenBtn.addEventListener("click", () => {
     settingsHandler.openPage();

@@ -67,7 +67,15 @@ class JSON_Config {
         if (fs.existsSync(this.pathToConfig)) {
             let content = fs.readFileSync(this.pathToConfig, "utf8");
             if (this.validateConfig(content)) {
-                this.config = JSON.parse(content);
+                let updatedConfig = JSON.parse(content);
+                for (let key in this.config) {
+                    if (!(key in updatedConfig)) {
+                        updatedConfig[key] = this.config[key];
+                        this.writeToConfig(updatedConfig);
+                        this.readConfig();
+                    }
+                }
+                this.config = updatedConfig;
             } else {
                 // writing the existing config to the file if validate fails
                 this.writeToConfig(this.config);
@@ -126,6 +134,7 @@ class bellsConfig extends JSON_Config {
         super(pathToConfig);
         this.config = {
             bells: [],
+            sortBy: "name",
         };
         this.updateBells = () => {};
         this.readBells();
@@ -164,6 +173,14 @@ class bellsConfig extends JSON_Config {
         });
 
         return this.config.bells;
+    }
+
+    setSortBy(sortBy) {
+        this.setKey("sortBy", sortBy);
+    }
+
+    getSortBy() {
+        return this.config.sortBy;
     }
 }
 

@@ -258,6 +258,47 @@ input[type="range"]:hover::-webkit-slider-thumb {
     color: var(--background);
 }
 
+.SortDropDownContainer {
+    display: inline-block;
+    position: relative;
+}
+
+.SortDropDownItemsContainer {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background-color: var(--background);
+    border: 1px solid var(--foreground);
+    border-radius: 9px;
+    width: 150px;
+    padding: 4px;
+    right: 0;
+    gap: 2px;
+}
+
+.SortDropDownContainer:hover .SortDropDownItemsContainer {
+    display: flex;
+}
+
+.SortDropDownItemsContainer > * {
+    color: var(--foreground);
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    padding: 10px;
+    transition: 0.1s ease-in-out;
+}
+
+.SortDropDownItemsContainer > *:hover {
+    background-color: var(--foreground);
+    color: var(--background);
+}
+
+.SortDropDownItemsContainer > *.active {
+    background-color: var(--foreground);
+    color: var(--background);
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
