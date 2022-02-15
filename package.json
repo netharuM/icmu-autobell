@@ -1,7 +1,7 @@
 {
   "name": "auto-bell",
   "productName": "auto-bell",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "auto-bell for the isipathana college media unit",
   "main": "src/index.js",
   "scripts": {
