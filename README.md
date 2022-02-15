@@ -21,7 +21,10 @@ for the linux installation
     ```
 
 - uninstall application from a linux machine
+
     ```bash
     chmod +x UNINSTALL.sh
     ./UNINSTALL.sh
     ```
+
+you dont have to run ```chmod +x {filename}``` everytime
