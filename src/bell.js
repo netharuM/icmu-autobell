@@ -331,6 +331,15 @@ class bell {
             hour: "numeric",
             minute: "numeric",
         });
+        this.time12hrFormatter = new Intl.DateTimeFormat("en-US", {
+            hourCycle: "h23",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+        });
+        this.formattedTime12hr = this.time12hrFormatter.format(
+            new Date(0, 0, 0, this.time.hour, this.time.minute)
+        );
         this.formattedTime = this.timeFormatter.format(
             new Date(0, 0, 0, this.time.hour, this.time.minute)
         );
@@ -348,7 +357,7 @@ class bell {
             this.bellNotification = new Notification(
                 `auto-bell : ${data.name}`,
                 {
-                    body: `up coming alarm at ${this.formattedTime}`,
+                    body: `up coming alarm at ${this.formattedTime12hr}`,
                     icon: path.resolve(__dirname, "../assets/icon.png"),
                 }
             );
@@ -413,11 +422,33 @@ class bell {
         let bellDropDown = document.createElement("div");
         bellDropDown.className = "bellDropDown";
 
-        let description = document.createElement("p");
-        description.innerText = this.data.desc;
-        description.className = "bellDropDownDescription";
+        let template = document.createElement("div");
+        template.className = "bellDropDownTemplate";
+        template.innerHTML = `
+            <div>
+                <label>description : </label>
+                <p class="desc_preview" id="desc">
+                    DESC
+                </p>
+            </div>
+            <button class="dropDownBtn" id="select-audio-btn">
+                Open Audio 
+            </button>
+            <div class="time_preview" id="time">
+                TIME
+            </div>
+        `;
 
-        bellDropDown.appendChild(description);
+        template.querySelector("#desc").innerText = this.data.desc;
+        template.querySelector(
+            "#time"
+        ).innerText = `time : ${this.formattedTime12hr}`;
+        template
+            .querySelector("#select-audio-btn")
+            .addEventListener("click", () => {
+                shell.showItemInFolder(this.data.audioPath);
+            });
+        bellDropDown.appendChild(template);
         return bellDropDown;
     }
 
@@ -430,7 +461,7 @@ class bell {
         bellName.classList.add("bellName");
 
         let bellTime = document.createElement("label");
-        bellTime.innerText = this.formattedTime;
+        bellTime.innerText = this.formattedTime12hr;
         bellTime.classList.add("bellTime");
 
         let bellTools = document.createElement("div");
