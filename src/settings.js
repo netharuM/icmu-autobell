@@ -174,7 +174,7 @@ class settings {
         this.appSettings = new applicationSettings();
 
         document.getElementById("instaLink").addEventListener("click", () => {
-            shell.openExternal("https://instagram.com/netharu_methmitha");
+            shell.openExternal("https://instagram.com/netharuM");
         });
         document.getElementById("githubLink").addEventListener("click", () => {
             shell.openExternal("https://github.com/netharuM/icmu-autobell");
