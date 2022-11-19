@@ -1,8 +1,7 @@
 # icmu-autobell
 
-⚠⚠⚠⚠ this project has been deprecated and its moved to [auto-bell](https://github.com/netharuM/auto-bell) ⚠⚠⚠⚠
-
-⚠ only security and some few more updates will be recieved ⚠
+> **Warning**
+> This code base has been deprecated and no longer maintained the project has been moved to another repository : [auto-bell](https://github.com/netharuM/auto-bell)
 
 for windows installation
 download the latest release and run it
